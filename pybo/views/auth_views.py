@@ -53,7 +53,7 @@ def load_loggend_in_user():
 @bp.route('/logout/')
 def logout():
     session.clear()
-    return redirect(url_for('main_index'))
+    return redirect(url_for('main.index'))
 
 def login_required(view):
     @functools.wraps(view)
