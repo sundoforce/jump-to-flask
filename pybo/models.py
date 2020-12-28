@@ -42,3 +42,5 @@ class Comment(db.Model):
     answer_id = db.Column(db.Integer, db.ForeignKey(
         'answer.id', ondelete='CASCADE'), nullable=True)
     answer = db.relationship('Answer', backref=db.backref('comment_set'))
+
+

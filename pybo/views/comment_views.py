@@ -10,7 +10,7 @@ from pybo.views.auth_views import login_required
 
 bp = Blueprint('comment', __name__, url_prefix='/comment')
 
-@bp.route('/crate/question/<int:question_id>', methods=('GET', 'POST'))
+@bp.route('/create/question/<int:question_id>', methods=('GET', 'POST'))
 @login_required
 def create_question(question_id):
     form = CommentForm()
@@ -90,11 +90,11 @@ def modify_answer(comment_id):
 @bp.route('/delete/answer/<int:comment_id>')
 @login_required
 def delete_answer(commet_id):
-    commet = Comment.query.get_or_404(commet_id)
+    comment = Comment.query.get_or_404(commet_id)
     question_id = comment.answer.question_id
-    if g.user != commet.user:
+    if g.user != comment.user:
         flash('삭제권한이 없습니다')
         return redirect(url_for('question.detail', question_id=question_id))
-    db.session.delete(commet)
+    db.session.delete(comment)
     db.session.commit()
     return redirect(url_for('question.detail', question_id=question_id))
